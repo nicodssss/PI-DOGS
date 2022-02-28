@@ -1,11 +1,12 @@
-import './App.css';
+// import React, { useState, useEffect } from 'react';
+import Cards from "./components/Cards";
+import OnSearch from "./components/OnSearch";
+// import axios from 'axios';
 
 function App() {
-  return (
-    <div className="App">
-      <h1>Henry Dogs</h1>
-    </div>
-  );
+  return <div>
+          <Cards />
+        </div>
 }
 
 export default App;
