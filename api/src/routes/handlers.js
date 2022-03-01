@@ -31,13 +31,7 @@ Crea una raza de perro en la base de datos
 const getDogs = async (req,res) => { // dogs with the data for main route: image, name, temps, weight and if byname necessay
     try {
         const dogs = await getAllDogs();
-        const data = dogs.map(dog =>({
-                id: dog.id,
-                img: dog.img,
-                name: dog.name,
-                temperament: dog.temperament,
-                weight: dog.weight
-            }))
+        const data = dogs.map(dog => dog)
         const { name } = req.query;
             
         if(name){ 
@@ -46,7 +40,7 @@ const getDogs = async (req,res) => { // dogs with the data for main route: image
                     return res.status(200).json(match);
                 } else {
                     console.log('asdasdasdasdasdasdasdasd')
-                    return res.status(201).send({message: 'Not found'})
+                    return res.status(200).send({message: 'Not found'})
                 }
             } 
         else {
@@ -82,7 +76,7 @@ const getTemps = async (req,res) => {
             let aux = t.toLowerCase();
             Temperament.findOrCreate(
                 {
-                where: { name: aux}
+                where: { name: aux }
                 }
             )
         })
@@ -96,7 +90,7 @@ const getTemps = async (req,res) => {
 
 const createDog = async (req, res) => {
     try {
-        const { name, img, minHeight, maxHeight, minWeight, maxWeight, lifeExp, temperament } = req.body;
+        const { name, img, minHeight, maxHeight, minWeight, maxWeight, minLifeExp, maxLifeExp, temperament } = req.body;
         const newDog = await Dog.create({
             name,
             img,
@@ -104,7 +98,8 @@ const createDog = async (req, res) => {
             maxHeight,
             minWeight,
             maxWeight,
-            lifeExp
+            minLifeExp,
+            maxLifeExp
         })
         for (let i = 0; i < temperament.length; i++) {
             let a = await Temperament.findOne({ where:{ name: temperament[i]}})
@@ -114,7 +109,7 @@ const createDog = async (req, res) => {
         res.send(newDog)
     }
     catch (err) {
-        console.log(err)
+        res.send(err)
     }
 }
 

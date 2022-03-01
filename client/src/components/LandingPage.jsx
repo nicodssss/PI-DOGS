@@ -8,7 +8,9 @@ export default function LandingPage (){
             <h1 > WELCOME </h1>
             <Link to = '/home'>
                 <button>Enter</button>
-
+            </Link>
+            <Link to = '/dog'>
+                <button>Create</button>
             </Link>
         
         </div>

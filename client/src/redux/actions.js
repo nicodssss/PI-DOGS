@@ -32,7 +32,7 @@ export const getTemps = () => {
 
 export const createDog = async (state) => { // useState para crear dog desde el form, paso el dog completo cuando esten todos los campos llenos xd
     try{
-        let newDogInServer = `${sv}/dogs`
+        let newDogInServer = `${sv}/dog`
         await axios.post(newDogInServer, state)
         return window.alert(`The dog ${state.name} has been created`)
     }

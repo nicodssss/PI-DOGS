@@ -1,4 +1,5 @@
-const axios = require('axios')
+const axios = require('axios');
+const db = require('../db');
 
 // API + APIKEY
 const api = 'https://api.thedogapi.com/v1/breeds?api_key='
@@ -17,7 +18,8 @@ const getApiDogs = async ()=> {
         temperament: dog.temperament,
         weight: dog.weight.metric,
         height: dog.height.metric,
-        lifeExp: dog.life_span
+        lifeExp: dog.life_span,
+        createdInDB: false
     }))
     return dogs;
 }
@@ -25,8 +27,25 @@ const getApiDogs = async ()=> {
 // --- DBDOGS ---
 
 const getDBDogs = async () => {
-    return await Dog.findAll({
+    const dbDogs = await Dog.findAll({
         include: Temperament
+    })
+    return dbDogs.map(dog=>{ 
+            let newTemp = dog.temperaments[0].name
+            for(let i = 1; i < dog.temperaments.length; i++ ){
+                newTemp = newTemp + ', ' + dog.temperaments[i].name 
+            }
+            return {
+                id: dog.id,
+                name: dog.name,
+                img: dog.img,
+                temperament: newTemp,
+                weight: `${dog.minWeight} - ${dog.maxWeight}`,
+                height: `${dog.minHeight} - ${dog.maxHeight}`,
+                lifeExp: `${dog.minLifeExp} - ${dog.maxLifeExp} years`,
+                createdInDB: dog.createdInDB
+            
+        }
     })
 }
 
