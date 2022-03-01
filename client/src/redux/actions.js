@@ -6,40 +6,27 @@ export const getAll = () => {
         const server = `${sv}/dogs`
         const response = await axios(server)
         const data = response.data.map(dato => {
-            if (dato.createdInDB === true) {
-                let temperament = dato.temperaments.map(temp => temp.name)
-                let joinTemps = temperament.join(', ')
-                return {
-                    id: dato.id,
-                    temperament: joinTemps,
-                    img: dato.img,
-                    name: dato.name,
-                    weight: `${dato.minWeight} - ${dato.maxWeight}`,
-                    height: `${dato.minHeight} - ${dato.maxHeight}`,
-                    createdInDB: true,
-                    lifeExp: `${dato.lifeExp} years`
-                }
-            }
-            if (!dato.weight.includes('NaN')) return dato
-            return null
+            return dato
         }).filter(Boolean);
-        return dispatch({
+        dispatch({
             type: '@get/dogs',
             payload: data
         })
 }
 }
 
-export const getTemps = async (dispatch) => {
+export const getTemps = () => {
+    return async (dispatch) => {
         let serverTemp = `${sv}/temperament`;
         const res = await axios(serverTemp);
         const data2 = res.data.map(temp => {
             return temp.name
         });
-        return dispatch({
+        dispatch({
             type: '@get/temps',
             payload: data2
         })
+}
 }
     
 

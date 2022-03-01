@@ -19,7 +19,8 @@ export default function mainReducer (state = initialState, {type, payload}){
             temperaments: payload
         }
         case '@filter/dog': // CardDetail
-            const match = state.aux.find(dog => dog.id === payload)
+            let match = dogAux.find(dog => dog.id === payload)
+            if(payload === null) match = {}
             return {
                 ...state,
                 dog: match
@@ -36,9 +37,10 @@ export default function mainReducer (state = initialState, {type, payload}){
             }
         case '@filter/condition': // will be 3 conditions 'api' 'data base' && temps
             const dogs = state.aux.filter(dog=> {
+                if(payload.toLowerCase() === 'all') return dog;
                 if(payload.toLowerCase() === 'api' && !dog.createdInDB) return dog;
                 if(payload.toLowerCase() === 'data base' && dog.createdInDB) return dog;
-                if(dog.temperament && dog.temperament.includes(payload)) return dog;
+                if(dog.temperament && dog.temperament.toLowerCase().includes(payload.toLowerCase())) return dog;
                 return null
             }).filter(Boolean) // to clear the null's 
             return {
@@ -47,8 +49,8 @@ export default function mainReducer (state = initialState, {type, payload}){
             }
         case '@filter/AZ':
             const orderA = dogAux.sort((prev, post) => {
-                if (prev.name < post.name) return -1;
-                else if (prev.name > post.name) return 1;
+                if (prev.name.toLowerCase() < post.name.toLowerCase()) return -1;
+                else if (prev.name.toLowerCase() > post.name.toLowerCase()) return 1;
                 else return 0
             });
             return {
@@ -57,8 +59,8 @@ export default function mainReducer (state = initialState, {type, payload}){
             }
         case '@filter/ZA': 
             const orderZ = dogAux.sort((prev, post) => {
-                if (prev.name < post.name) return -1;
-                else if (prev.name > post.name) return 1;
+                if (prev.name.toLowerCase() < post.name.toLowerCase()) return 1;
+                else if (prev.name.toLowerCase() > post.name.toLowerCase()) return -1;
                 else return 0
             });
             return {
