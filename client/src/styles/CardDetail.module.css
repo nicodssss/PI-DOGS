@@ -1,0 +1,29 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.title{
+    font-weight: 700;
+    margin-top: 20px;
+}
+.container{
+    padding: 40px;
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+}
+.box{
+    padding: 30px;
+    width: 40%;
+    border-left: 1px solid rgba(0, 0, 0, 0.3);
+}
+.p{
+    margin-bottom: 10px;
+}
+.imgdog{
+    overflow: hidden;
+}
+.imgContainer{
+    width: 50%;
+    border-radius: 30px;
+}

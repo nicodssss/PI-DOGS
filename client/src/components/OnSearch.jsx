@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { search } from "../redux/actions";
-
+import Styles from '../styles/OnSearch.module.css'
 
 export default function OnSearch() { 
     const dispatch = useDispatch()
@@ -19,8 +19,8 @@ export default function OnSearch() {
 
     return (
         <div>
-            <input type='text' placeholder='Type a dog name...' onChange={handleInputChange}></input>
-            <button type='submit' onClick={handleSummit}></button>
+            <input className={Styles.searchbar} type='text' placeholder='Type a dog name...' onChange={handleInputChange}></input>
+            <button className={Styles.bttn} type='submit' onClick={handleSummit}>FIND</button>
         </div>
     )
 }

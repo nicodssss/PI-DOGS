@@ -5,7 +5,7 @@ import {  getAll, getTemps, orderA, orderD, orderHeavy, orderLight, filterBy, br
 import DogCard from "./DogCard";
 import OnSearch from "./OnSearch";
 import Pagination from "./Pagination";
-
+import Styles from '../styles/Cards.module.css'
 
 const Cards = () => {
     
@@ -60,20 +60,20 @@ const Cards = () => {
             <div>
                 <button onClick={handleClick}>Reload</button>
                 <label htmlFor="select">Fiter By:</label>
-                    <select onChange={handleSortAZ}>
+                    <select className={Styles.minimal} onChange={handleSortAZ}>
                         <option value='A-Z'>A-Z</option>
                         <option value='Z-A'>Z-A</option>
                     </select>
-                    <select onChange={handleSortWeight}>
+                    <select className={Styles.minimal} onChange={handleSortWeight}>
                         <option value='lighter'>LIGHT TO HEAVY</option>
                         <option value='heavier'>HEAVY TO LIGHT</option>
                     </select>
-                    <select onChange={handleSortCustom}>
+                    <select className={Styles.minimal} onChange={handleSortCustom}>
                         <option value='all'>ALL</option>
                         <option value='api'>API</option>
                         <option value='data base'>DATABASE</option>
                     </select>
-                    <select onChange={handleSortCustom}>
+                    <select className={Styles.minimal} onChange={handleSortCustom}>
                         {
                             temps.map((temp, id) => {
                                 return <option value={temp} key={id}>{temp}</option> 

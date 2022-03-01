@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { createDog, getTemps } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
+import '../styles/dogcreate.css'
 
 const CreateDog = () => {
+
     const [state, setState] = useState({
         name: '',
-        img: 'https://fondosmil.com/fondo/17538.jpg',
+        img: 'https://www.mundoperro.net/wp-content/uploads/Beagle1.jpg',
         minHeight: '',
         maxHeight: '',
         minWeight: '',
@@ -15,30 +17,34 @@ const CreateDog = () => {
         maxLifeExp: '',
         temperament: []
     })
-    /* bring Temps */
+
+    /* bring Temps / dispatch and navigate to use history  */
     const dispatch = useDispatch()
     let navigate = useNavigate()
-
+    
     useEffect(() => {
         dispatch(getTemps())
     }, [dispatch])
 
     const temps = useSelector(state => state.temperaments)
     
-    /* Change the state */
-    const handleChange = ({ target: { name, value } }) => {
+    // functions to change my state 
+
+    const handleChange = ({ target: { name, value } }) => { // destructuring to get name and values from event.target --> works on every input
         setState({ ...state, [name]: value })
     }
-    const pushValues = ({ target: { value } }) => {
-        if (!state.temperament.includes(value)) {
+    // function to add temps to my array 
+    const pushValues = ({ target: { value } }) => { // to get only the value
+        if (!state.temperament.includes(value)) { // check if state includes the temps --> if we add before
             setState({
                 ...state,
-                temperament: [...state.temperament, value]
+                temperament: [...state.temperament, value] // we make a copy of the state and modify only temps with their copy and the new value 
             })
         }
     }
-    const cleanTemps = ({ target: { name } }) => {
-        let newTemps = state.temperament.filter(temp => temp !== name)
+   
+    const cleanTemps = ({ target: { name } }) => {  // it works on div where we can see the temps we have add but now we delete if we dont want the temp anymore
+        let newTemps = state.temperament.filter(temp => temp !== name) // filter clean the temp that we 'X' from the array 
         setState({
             ...state,
             temperament: newTemps
@@ -61,138 +67,92 @@ const CreateDog = () => {
         
     }
     return (
-        <div  >
+        <div  className='container' >
             
             <div >
-                <h2>CREATE DOG</h2>
+                <h2 className="title">CREATE YOUR DOG</h2>
                 <div  >
-                    <div  >
+                    <div  className="form">
                         {/* Name */}
                         <span>Name</span>
-                        {!state.name ? (<span  >Name is required</span>) 
-                            : !state.name.match(/^[A-Za-z ]+$/) ? (<span  >Name can not contains Numbers</span>)
+                        {!state.name ? (<span className="message" >Name is empty</span>) 
+                            : !state.name.match(/^[A-Za-z ]+$/) ? (<span className="message">Name should not have numbers</span>) // /^[A-Za-z ]+$/ --> contains only strings from A-Z and a-z
                             : null}
                         <label>
-                            <input
-                               
-                                id='name'
-                                type='text'
-                                name='name'
-                                placeholder='Name'
-                                value={state.name}
-                                onChange={handleChange}
-                            />
+
+                            <input  id='name'  type='text' name='name' placeholder='Insert your dog name' value={state.name} onChange={handleChange} />
+
                         </label>
+                        <span>Image</span>
+                        <span className="message">You can use your own image or left default image</span>
                         <label>
-                            <input
-                                id='img'
-                                type='text'
-                                name='img'
-                                placeholder='Url imagen'
-                                value={state.img}
-                                onChange={handleChange}
-                            />
+
+                            <input id='img' type='text' name='img' placeholder='Insert your image url' value={state.img} onChange={handleChange}/>
+
                         </label>
                         {/* Min/Max height */}
-                        <span>Min/Max height</span>
-                        {!state.minHeight && !state.maxHeight ? (<span >Min and Max Height is required</span>) 
-                            : !state.minHeight ? (<span >Min Height is required</span>)
-                            : !state.maxHeight ? (<span  >Max Height is required</span>)
-                            : state.minHeight > state.maxHeight ? (<span  >Max height should be greater than Min height</span>)
-                            : <span  >{state.minHeight} - {state.maxHeight}</span>}
+                        <span>Min/Max Height</span>
+                        {!state.minHeight && !state.maxHeight ? (<span className="message">Min and Max Height are empty</span>) 
+                            : !state.minHeight ? (<span className="message">Min Height is empty</span>)
+                            : !state.maxHeight ? (<span className="message" >Max Height is empty</span>)
+                            : state.minHeight > state.maxHeight ? (<span className="message" >Max height must be better than Min height</span>)
+                            : <span className="message" >{state.minHeight} - {state.maxHeight}</span>}
                         <label>
-                            <input
-                                id='minH'
-                                type='number'
-                                name='minHeight'
-                                min='0'
-                                placeholder='Min Height'
-                                value={state.minH}
-                                onChange={handleChange}
-                            />
+
+                            <input id='minH' type='number' name='minHeight' min='0' placeholder='Insert your dog min Height' value={state.minH} onChange={handleChange} />
+
                         </label>
                         <label>
-                            <input
-                                id='maxH'
-                                type='number'
-                                name='maxHeight'
-                                min='0'
-                                placeholder='Max Height'
-                                value={state.maxH}
-                                onChange={handleChange}
-                            />
+
+                            <input id='maxH' type='number' name='maxHeight' min='0' placeholder='Insert your dog max Height' value={state.maxH} onChange={handleChange} />
+
                         </label>
                         {/* Min/Max Weight */}
-                        <span>Min/Max weight</span>
-                        {!state.minWeight && !state.maxWeight ? (<span  >Min and Max Weight is required</span>) 
-                            : !state.minWeight ? (<span >Min Weight is required</span>)
-                            : !state.maxWeight ? (<span  >Max Weight is required</span>)
-                            : state.minWeight > state.maxWeight ? (<span  >Max Weight should be greater than Min Weight</span>)
-                            : <span  >{state.minWeight} - {state.maxWeight}</span>}
+                        <span>Min/Max Weight</span>
+                        {!state.minWeight && !state.maxWeight ? (<span className="message">Min and Max Weight are empty</span>) 
+                            : !state.minWeight ? (<span className="message">Min Weight is empty</span>)
+                            : !state.maxWeight ? (<span className="message"  >Max Weight is empty</span>)
+                            : state.minWeight > state.maxWeight ? (<span  className="message">Max Weight must be better than Min Weight</span>)
+                            : <span className="message" >{state.minWeight} - {state.maxWeight}</span>}
                         <label>
-                            <input
-                                id='minW'
-                                type='number'
-                                name='minWeight'
-                                min='0'
-                                placeholder='Min Weight'
-                                value={state.minW}
-                                onChange={handleChange}
-                            />
+                            <input  id='minW' type='number' name='minWeight' min='0' placeholder='Insert your dog min Weight' value={state.minW} onChange={handleChange} />
                         </label>
                         <label>
-                            <input
-                                id='maxW'
-                                name='maxWeight'
-                                type='number'
-                                placeholder='Max Weight'
-                                min='0'
-                                value={state.maxW}
-                                onChange={handleChange}
-                            />
+                            <input id='maxW' name='maxWeight' type='number' placeholder='Insert your dog max Weight' min='0' value={state.maxW} onChange={handleChange} />
                         </label>
                         {/* Life Expectancy */}
                         <span>Min/Max Life Expectancy</span>
-                        {!state.minLifeExp && !state.maxLifeExp ? (<span  >Min and Max Expectanc is required</span>) 
-                            : !state.minLifeExp ? (<span  >Min Weight is required</span>)
-                            : !state.maxLifeExp ? (<span  >Max Weight is required</span>)
-                            : state.minLifeExp > state.maxLifeExp ? (<span  >Max Weight should be greater than Min Weight</span>)
-                            : <span  >{state.minLifeExp} - {state.maxLifeExp}</span>}
+                        {!state.minLifeExp && !state.maxLifeExp ? (<span className="message" >Min and Max Expectanc are empty</span>) 
+                            : !state.minLifeExp ? (<span className="message" >Min Weight is empty</span>)
+                            : !state.maxLifeExp ? (<span className="message" >Max Weight is empty</span>)
+                            : state.minLifeExp > state.maxLifeExp ? (<span className="message" >Max Weight must be better than Min Weight</span>)
+                            : <span className="message" >{state.minLifeExp} - {state.maxLifeExp}</span>}
                         <label>
-                            <input
-                                id='minLifeExp'
-                                name='minLifeExp'
-                                type='number'
-                                min='0'
-                                placeholder='Min Life Expectancy'
-                                value={state.minLifeExp}
-                                onChange={handleChange} />
+
+                            <input id='minLifeExp' name='minLifeExp' type='number' min='0' placeholder='Insert your dog min Life Expectancy' value={state.minLifeExp} onChange={handleChange} />
+
                         </label>
                         <label>
-                            <input
-                                id='maxLifeExp'
-                                name='maxLifeExp'
-                                type='number'
-                                placeholder='Max Life Expectancy'
-                                min='0'
-                                value={state.maxLifeExp}
-                                onChange={handleChange}
-                            />
+
+                            <input id='maxLifeExp' name='maxLifeExp' type='number' placeholder='Insert your dog max Life Expectancy' min='0' value={state.maxLifeExp} onChange={handleChange} />
+
                         </label><br />
                         <span>Add Temperament</span>
-                        {state.temperament.lenght ? (<span></span>)
-                            : (<span  >Should have at least one temperament</span>)}
+                        {state.temperament.lenght ? (<span className="message">{`${state.temperament.lenght} are good`}</span>)
+                            : (<span className="message" >Include at least one temperament</span>)}
                         <select onChange={pushValues} defaultValue='addTemp' name='temperament' placeholder='Add Temperament'>
-                            <option value='addTemp' disabled>Add Temperament</option>
+                            <option value='addTemp' disabled>Add Temperament</option> 
                             {temps.map((temp, idx) => (<option value={temp} name={temp} key={idx+1} >{temp}</option>))}
                         </select>
-                        <button  onClick={submitDog} >
+                        <button className="summitbutton" onClick={submitDog} >
                             Create
                         </button>
                     </div>
-                    <div  >
+                    <div className="tempsBox">
+                        <span>TEMPERAMENTS YOU ADDED</span>
+                        <span className="message">Click on 'X' button to delete</span>
                         <div >
-                            {state.temperament.map(temp => (<div>
+                            {state.temperament.map(temp => (<div className='tempAdd' >
                                 <button onClick={cleanTemps} name={temp}>X</button>
                                 <span>{temp}</span>
                             </div>))}

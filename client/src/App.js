@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Cards from "./components/Cards";
 import CreateDog from "./components/DogCreate";
 import DogDetail from "./components/DogDetail";
-
 import LandingPage from "./components/LandingPage";
 function App() {
   return (

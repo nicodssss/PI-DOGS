@@ -1,0 +1,21 @@
+.searchbar {
+    width: 20%;
+    margin-left: 110px;
+    padding: 10px 30px;
+    padding: 10px 30px;
+    border: thin solid blue;
+    border-radius: 4px;
+    appearance: none;
+    position: relative;
+}
+
+.bttn{
+    width: 75px;
+    margin-left: 10px;
+    padding: 10px 30px;
+    padding: 10px 30px;
+    border: thin solid blue;
+    border-radius: 4px;
+    appearance: none;
+    position: relative;
+}
