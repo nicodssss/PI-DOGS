@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createDog, getTemps } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import {  useNavigate } from 'react-router-dom';
-import '../styles/dogcreate.css'
+import Styles from '../styles/DogCreate.module.css'
 
 const CreateDog = () => {
 
@@ -67,16 +67,16 @@ const CreateDog = () => {
         
     }
     return (
-        <div  className='container' >
+        <div  className={Styles.container} >
             
             <div >
-                <h2 className="title">CREATE YOUR DOG</h2>
+                <h2 className={Styles.title}>CREATE YOUR DOG</h2>
                 <div  >
-                    <div  className="form">
+                    <div  className={Styles.form}>
                         {/* Name */}
                         <span>Name</span>
-                        {!state.name ? (<span className="message" >Name is empty</span>) 
-                            : !state.name.match(/^[A-Za-z ]+$/) ? (<span className="message">Name should not have numbers</span>) // /^[A-Za-z ]+$/ --> contains only strings from A-Z and a-z
+                        {!state.name ? (<span className={Styles.message} >Name is empty</span>) 
+                            : !state.name.match(/^[A-Za-z ]+$/) ? (<span className={Styles.message} >Name should not have numbers</span>) // /^[A-Za-z ]+$/ --> contains only strings from A-Z and a-z
                             : null}
                         <label>
 
@@ -84,7 +84,7 @@ const CreateDog = () => {
 
                         </label>
                         <span>Image</span>
-                        <span className="message">You can use your own image or left default image</span>
+                        <span className={Styles.message}>You can use your own image or left default image</span>
                         <label>
 
                             <input id='img' type='text' name='img' placeholder='Insert your image url' value={state.img} onChange={handleChange}/>
@@ -92,11 +92,11 @@ const CreateDog = () => {
                         </label>
                         {/* Min/Max height */}
                         <span>Min/Max Height</span>
-                        {!state.minHeight && !state.maxHeight ? (<span className="message">Min and Max Height are empty</span>) 
-                            : !state.minHeight ? (<span className="message">Min Height is empty</span>)
-                            : !state.maxHeight ? (<span className="message" >Max Height is empty</span>)
-                            : state.minHeight > state.maxHeight ? (<span className="message" >Max height must be better than Min height</span>)
-                            : <span className="message" >{state.minHeight} - {state.maxHeight}</span>}
+                        {!state.minHeight && !state.maxHeight ? (<span className={Styles.message}>Min and Max Height are empty</span>) 
+                            : !state.minHeight ? (<span className={Styles.message}>Min Height is empty</span>)
+                            : !state.maxHeight ? (<span className={Styles.message} >Max Height is empty</span>)
+                            : parseInt(state.minHeight) > parseInt(state.maxHeight) ? (<span className={Styles.message} >Max height must be better than Min height</span>)
+                            : <span className={Styles.message} >{state.minHeight} - {state.maxHeight}</span>}
                         <label>
 
                             <input id='minH' type='number' name='minHeight' min='0' placeholder='Insert your dog min Height' value={state.minH} onChange={handleChange} />
@@ -109,11 +109,11 @@ const CreateDog = () => {
                         </label>
                         {/* Min/Max Weight */}
                         <span>Min/Max Weight</span>
-                        {!state.minWeight && !state.maxWeight ? (<span className="message">Min and Max Weight are empty</span>) 
-                            : !state.minWeight ? (<span className="message">Min Weight is empty</span>)
-                            : !state.maxWeight ? (<span className="message"  >Max Weight is empty</span>)
-                            : state.minWeight > state.maxWeight ? (<span  className="message">Max Weight must be better than Min Weight</span>)
-                            : <span className="message" >{state.minWeight} - {state.maxWeight}</span>}
+                        {!state.minWeight && !state.maxWeight ? (<span className={Styles.message}>Min and Max Weight are empty</span>) 
+                            : !state.minWeight ? (<span className={Styles.message}>Min Weight is empty</span>)
+                            : !state.maxWeight ? (<span className={Styles.message}  >Max Weight is empty</span>)
+                            : parseInt(state.minWeight) > parseInt(state.maxWeight) ? (<span  className={Styles.message}>Max Weight must be better than Min Weight</span>)
+                            : <span className={Styles.message} >{state.minWeight} - {state.maxWeight}</span>}
                         <label>
                             <input  id='minW' type='number' name='minWeight' min='0' placeholder='Insert your dog min Weight' value={state.minW} onChange={handleChange} />
                         </label>
@@ -122,11 +122,11 @@ const CreateDog = () => {
                         </label>
                         {/* Life Expectancy */}
                         <span>Min/Max Life Expectancy</span>
-                        {!state.minLifeExp && !state.maxLifeExp ? (<span className="message" >Min and Max Expectanc are empty</span>) 
-                            : !state.minLifeExp ? (<span className="message" >Min Weight is empty</span>)
-                            : !state.maxLifeExp ? (<span className="message" >Max Weight is empty</span>)
-                            : state.minLifeExp > state.maxLifeExp ? (<span className="message" >Max Weight must be better than Min Weight</span>)
-                            : <span className="message" >{state.minLifeExp} - {state.maxLifeExp}</span>}
+                        {!state.minLifeExp && !state.maxLifeExp ? (<span className={Styles.message} >Min and Max Expectanc are empty</span>) 
+                            : !state.minLifeExp ? (<span className={Styles.message} >Min Weight is empty</span>)
+                            : !state.maxLifeExp ? (<span className={Styles.message} >Max Weight is empty</span>)
+                            : parseInt(state.minLifeExp) > parseInt(state.maxLifeExp) ? (<span className={Styles.message} >Max Weight must be better than Min Weight</span>)
+                            : <span className={Styles.message} >{state.minLifeExp} - {state.maxLifeExp}</span>}
                         <label>
 
                             <input id='minLifeExp' name='minLifeExp' type='number' min='0' placeholder='Insert your dog min Life Expectancy' value={state.minLifeExp} onChange={handleChange} />
@@ -138,21 +138,22 @@ const CreateDog = () => {
 
                         </label><br />
                         <span>Add Temperament</span>
-                        {state.temperament.lenght ? (<span className="message">{`${state.temperament.lenght} are good`}</span>)
-                            : (<span className="message" >Include at least one temperament</span>)}
+                        {state.temperament.length === 1 ? (<span className={Styles.message}>{`${state.temperament.length} is good`}</span>)
+                            : state.temperament.length > 1 ? (<span className={Styles.message}>{`${state.temperament.length} are good`}</span>)
+                            : (<span className={Styles.message} >Include at least one temperament</span>)}
                         <select onChange={pushValues} defaultValue='addTemp' name='temperament' placeholder='Add Temperament'>
                             <option value='addTemp' disabled>Add Temperament</option> 
                             {temps.map((temp, idx) => (<option value={temp} name={temp} key={idx+1} >{temp}</option>))}
                         </select>
-                        <button className="summitbutton" onClick={submitDog} >
+                        <button className={Styles.summitbutton} onClick={submitDog} >
                             Create
                         </button>
                     </div>
-                    <div className="tempsBox">
+                    <div className={Styles.tempsBox}>
                         <span>TEMPERAMENTS YOU ADDED</span>
-                        <span className="message">Click on 'X' button to delete</span>
+                        {state.temperament.length > 0 ? (<span className={Styles.message}>Click on 'X' button to delete</span>) : (<span className={Styles.message}>Temperaments selected</span>)}
                         <div >
-                            {state.temperament.map(temp => (<div className='tempAdd' >
+                            {state.temperament.map(temp => (<div className={Styles.tempAdd} >
                                 <button onClick={cleanTemps} name={temp}>X</button>
                                 <span>{temp}</span>
                             </div>))}

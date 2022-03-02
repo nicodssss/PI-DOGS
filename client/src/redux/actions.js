@@ -33,11 +33,11 @@ export const getTemps = () => {
 export const createDog = async (state) => { // useState para crear dog desde el form, paso el dog completo cuando esten todos los campos llenos xd
     try{
         let newDogInServer = `${sv}/dog`
-        await axios.post(newDogInServer, state)
-        return window.alert(`The dog ${state.name} has been created`)
+        await axios.post(newDogInServer, state) // axios.post  recives the server address and the objet (body)
+        return window.alert(`The dog ${state.name} has been created successfully`)
     }
     catch{
-        return window.alert('Error in the process')
+        return window.alert('Error creating your dog')
     }
 }
 /* Bring dog details */
@@ -60,6 +60,13 @@ export const filterBy = (condition) => {
         type: '@filter/condition', 
         payload: condition 
     } 
+}
+
+export const filterTemp = (temp) => {
+    return {
+        type: '@filter/temps',
+        payload: temp
+    }
 }
 /* Order AZ */
 export const orderD = () => { 
@@ -85,3 +92,11 @@ export const orderLight = () => {
         type: '@filter/lighter'
     } 
 }
+
+export const setPage = (n) => {
+    return {
+        type: '@set/page',
+        payload: n
+    }  
+}
+

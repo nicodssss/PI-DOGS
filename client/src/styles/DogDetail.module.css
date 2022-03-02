@@ -1,10 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap');
+
 *{
     padding: 0;
     margin: 0;
 }
+.mainDiv{
+    border: 1px solid blue;
+    border-radius: 5px;
+    margin: 20px;
+    font-family: 'Coming Soon', cursive;  
+}
 .title{
     font-weight: 700;
     margin-top: 20px;
+      
 }
 .container{
     padding: 40px;
@@ -15,15 +24,21 @@
 .box{
     padding: 30px;
     width: 40%;
-    border-left: 1px solid rgba(0, 0, 0, 0.3);
+    border-left: 1px solid red;
+}
+.box h3{
+    font-size: 20px;
 }
 .p{
     margin-bottom: 10px;
+    font-size: 15px;
 }
 .imgdog{
     overflow: hidden;
+    height: 100%;
 }
 .imgContainer{
     width: 50%;
     border-radius: 30px;
+    height: 600px;
 }

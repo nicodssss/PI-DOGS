@@ -14,14 +14,15 @@ const DogCard = ({ dogs }) => {
         }
         return (
         <div className={Styles.container2}>
-            <Link onClick={bringDog} to={`/home/${dog.id}`} className={Styles.Link}>
+            <Link onClick={bringDog} to={`/home/${dog.id}`} className={Styles.Link} key={dog.id}>
                 <div className={Styles.container} >
-                    <h2 className={Styles.h3} >{dog.name}</h2>
-                    <div className={Styles.spancontainer}>
-                        <p className={Styles.p} >Weight: {dog.weight} </p>
+                    <h2 className={Styles.h3} >{dog.name.toUpperCase()}</h2>
+                    <div className={Styles.info}>
+                        <p className={Styles.p} >Weight: {dog.weight} Kg </p>
                         <p className={Styles.p} >Temperament: {dog.temperament}</p>
+                        
                     </div>
-                    <div>
+                    <div className={Styles.imgContainer} >
                         <img className={Styles.img} src={dog.img} alt={dog.name} />
                     </div>
                 </div>

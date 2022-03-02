@@ -15,11 +15,12 @@ export default function OnSearch() {
     const handleSummit = (e) => {
         e.preventDefault()
         dispatch(search(dog))
+        setDog('')
     }
 
     return (
         <div>
-            <input className={Styles.searchbar} type='text' placeholder='Type a dog name...' onChange={handleInputChange}></input>
+            <input className={Styles.searchbar} type='text' placeholder='Type a dog name...' value={dog} onChange={handleInputChange}></input>
             <button className={Styles.bttn} type='submit' onClick={handleSummit}>FIND</button>
         </div>
     )
