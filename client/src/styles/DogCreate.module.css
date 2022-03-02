@@ -25,7 +25,9 @@
     box-shadow: 5px 0px 5px 5px green;
     margin: auto;
 }
-
+.form span{
+    background-color: white;
+}
 input, select{
     margin: 7px 0 10px;
     padding: 6px;
@@ -40,6 +42,7 @@ span{
     color: black;
     font-family: 'Hubballi', cursive;
     font-size: 20px;
+    
 }
 
 h2{
@@ -57,6 +60,7 @@ h2{
     border-left: 3px solid green;
     padding-left: 10px;
     font-family: 'Prompt', sans-serif;
+    background-color: white;
 }
 
 .summitbutton{
@@ -79,7 +83,9 @@ h2{
     border: 1px solid rgba(0, 0, 0, 0.4);
     margin: auto;
 }
-
+.span1{
+    background-color: white;
+}
 .tempAdd{
     color: white;
     font-size: 14px;

@@ -8,7 +8,7 @@ const CreateDog = () => {
 
     const [state, setState] = useState({
         name: '',
-        img: 'https://www.mundoperro.net/wp-content/uploads/Beagle1.jpg',
+        img: 'https://www.wallpaperkiss.com/wimg/b/156-1566065_big.jpg',
         minHeight: '',
         maxHeight: '',
         minWeight: '',
@@ -51,7 +51,7 @@ const CreateDog = () => {
         })
     }
     const submitDog = () => {
-        if (!state.name || !state.minHeight || !state.maxHeight || !state.minWeight || !state.maxWeight || !state.minLifeExp || !state.maxLifeExp || state.temperament.length < 1) {
+        if (!state.name || !state.minHeight || !state.maxHeight || !state.minWeight || !state.maxWeight || !state.minLifeExp || !state.maxLifeExp || state.temperament.length < 1 || state.minWeight < 0 || state.maxWeight < 0) {
             return alert('There are empty fields required')
         } else {
             let tempState = state.temperament.join(', ')
@@ -111,7 +111,8 @@ const CreateDog = () => {
                         <span>Min/Max Weight</span>
                         {!state.minWeight && !state.maxWeight ? (<span className={Styles.message}>Min and Max Weight are empty</span>) 
                             : !state.minWeight ? (<span className={Styles.message}>Min Weight is empty</span>)
-                            : !state.maxWeight ? (<span className={Styles.message}  >Max Weight is empty</span>)
+                            : !state.maxWeight ? (<span className={Styles.message}>Max Weight is empty</span>)
+                            : state.minWeight < 0 || state.maxWeight < 0 ? (<span className={Styles.message}>The number should be postive</span>)
                             : parseInt(state.minWeight) > parseInt(state.maxWeight) ? (<span  className={Styles.message}>Max Weight must be better than Min Weight</span>)
                             : <span className={Styles.message} >{state.minWeight} - {state.maxWeight}</span>}
                         <label>
@@ -150,7 +151,7 @@ const CreateDog = () => {
                         </button>
                     </div>
                     <div className={Styles.tempsBox}>
-                        <span>TEMPERAMENTS YOU ADDED</span>
+                        <span className={Styles.span1}>TEMPERAMENTS YOU ADDED</span>
                         {state.temperament.length > 0 ? (<span className={Styles.message}>Click on 'X' button to delete</span>) : (<span className={Styles.message}>Temperaments selected</span>)}
                         <div >
                             {state.temperament.map(temp => (<div className={Styles.tempAdd} >

@@ -7,23 +7,24 @@ import { useDispatch } from "react-redux";
 export default function LandingPage (){
     const dispatch = useDispatch()
     
+    
+
     useEffect(()=>{
         dispatch(setPage(1))
     },[dispatch])
-
+    
     return(
                   
             <div className={Styles.linksContainer}>
-            <h1 > DOGS </h1>
-                <div className={Styles.divBttn}>
+                
                     <Link to = '/home'>
-                        <button>Enter</button>
+                        <button className={Styles.divBttn}>HOME</button>
                     </Link>
                     <Link to = '/dog'>
-                        <button>Create</button>
+                        <button className={Styles.divBttn2}>CREATE</button>
                     </Link>
+                    
                 </div>
-            </div>
         
     )
 }

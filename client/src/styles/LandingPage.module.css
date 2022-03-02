@@ -1,16 +1,41 @@
-.linksContainer h1 { 
-    color: #111; 
-    font-family: 'Helvetica Neue', sans-serif; 
-    font-size: 275px; 
-    font-weight: bold; 
-    letter-spacing: -1px; 
-    line-height: 1; 
-    text-align: center; 
+.linksContainer {
+    width: 100%;
+    height: 100vh;
+    background-size:cover;
 }
 
-.linksContainer { 
-    background-color: orange;
-    height: 500px;
-    top: 50%;
-    display: flex;
+.divBttn{
+    padding: 10px 40px;
+    background-color: rgba(2,0,36, 0.6);
+    position: absolute; top: 50%;  left: 35%;
+    border: none;  border-radius: 17px;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+    font-size: 2.4rem;
+    color: #EEEEEE;
+    cursor: pointer;
+}
+.divBttn:hover{
+    background: rgb(2,0,36, 0.9);
+    box-shadow: 5px 5px 90px 7px #FF6F00;
+    color: #EEEEEE;
+    transition: 0.7s;
+}
+
+.divBttn2{
+    padding: 10px 40px;
+    background-color: rgba(2,0,36, 0.6);
+    position: absolute; top: 50%;  left: 50%;
+    border: none;  border-radius: 17px;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+    font-size: 2.4rem;
+    color: #EEEEEE;
+    cursor: pointer;
+}
+.divBttn2:hover{
+    background: rgb(2,0,36, 0.9);
+    box-shadow: 5px 5px 90px 7px #FF6F00;
+    color: #EEEEEE;
+    transition: 0.7s;
 }

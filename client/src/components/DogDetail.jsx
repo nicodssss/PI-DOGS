@@ -5,7 +5,11 @@ import Styles from '../styles/DogDetail.module.css'
 
 const DogDetail = () => {
 
+
+    
     const dog = useSelector((state)=> state.dog);
+
+
     return (      
         <div className={Styles.mainDiv}>
         <h2 className={Styles.title} >{dog.name.toUpperCase()}</h2>

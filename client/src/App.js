@@ -5,7 +5,6 @@ import CreateDog from "./components/DogCreate";
 import DogDetail from "./components/DogDetail";
 import LandingPage from "./components/LandingPage";
 import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
 
 
 function App() {
@@ -18,7 +17,7 @@ function App() {
         <Route path='/home/:id' element={<DogDetail />} />
         <Route exact path='/dog' element={<CreateDog />} />
       </Routes>
-      <Footer />
+      
     </BrowserRouter>
   )
 }

@@ -40,7 +40,7 @@ const getDBDogs = async () => {
                 name: dog.name,
                 img: dog.img,
                 temperament: newTemp,
-                weight: `${dog.minWeight} - ${dog.maxWeight}`,
+                weight: `${dog.minWeight} - ${dog.maxWeight}`, //  I made like this for the form, more practic
                 height: `${dog.minHeight} - ${dog.maxHeight}`,
                 lifeExp: `${dog.minLifeExp} - ${dog.maxLifeExp} years`,
                 createdInDB: dog.createdInDB
@@ -56,7 +56,7 @@ const getAllDogs = async () => {
     const allDogs = [...apiDogs, ...dbDogs]  
     return allDogs;
 }
-// All moods
+// All moods - include repeated and undefineds
 
 const getTemperaments = async () => {
     const getDogs = await getApiDogs(); 
@@ -71,13 +71,13 @@ const getTemperaments = async () => {
     return finalTemps 
 }
 
-//Moods 
+// All moods - without repeated and undefineds
 
 const setTemps = async () =>{
-    let moods = await getTemperaments();
-    const cleaning = new Set(moods) 
-    let clear = [...cleaning].filter(Boolean) 
-    return clear
+    let moods = await getTemperaments(); 
+    const cleaning = new Set(moods) // clean reapeated moods
+    let clear = [...cleaning].filter(Boolean) // cleaning undefineds 
+    return clear // return temperaments
 }
 
 

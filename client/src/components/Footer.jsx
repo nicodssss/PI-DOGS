@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <div className={Styles.footCont}>
             <footer className={Styles.foot}>
-                HOLA SOY UN FOOTER XD
+                Footer Under Construction
             </footer>
         </div>
     )
